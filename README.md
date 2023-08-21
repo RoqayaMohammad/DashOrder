@@ -2,6 +2,6 @@
 
 Technologies Used:
 - WPF
--.NET 7
+- .NET 7
 - SQL
 - MVVM Pattern
