@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.View"
+        
+        xmlns:viewModel="clr-namespace:WpfApp1.ViewModel"
         mc:Ignorable="d"
         Title="LoginView"
          Height="550" Width="800"
@@ -14,6 +16,10 @@
         AllowsTransparency="True"
         MouseDown="Window_MouseDown"
         >
+    <Window.DataContext>
+        <viewModel:LoginViewModel/>
+    </Window.DataContext>
+    
     <Border CornerRadius="12">
         <Border.Background>
             <ImageBrush ImageSource="/Images/Img1.jpg"
