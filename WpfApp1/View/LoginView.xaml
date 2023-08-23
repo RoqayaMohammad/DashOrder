@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.View"
+        xmlns:customcontrols="clr-namespace:WpfApp1.CustonControls"
         
         xmlns:viewModel="clr-namespace:WpfApp1.ViewModel"
         mc:Ignorable="d"
@@ -19,12 +20,20 @@
     <Window.DataContext>
         <viewModel:LoginViewModel/>
     </Window.DataContext>
-    
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+    </Window.Visibility>
+
     <Border CornerRadius="12">
-        <Border.Background>
+        <!--<Border.Background>
+           
             <ImageBrush ImageSource="/Images/Img1.jpg"
                         Stretch="None"/>
-        </Border.Background>
+        </Border.Background>-->
 
         <Border CornerRadius="10"                    
             BorderThickness="2"
@@ -171,6 +180,7 @@
                                Margin="0,35,0,0"/>
 
                     <TextBox x:Name="txtUser"
+                              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"                            
@@ -196,8 +206,19 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
+                    <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Height="28"                            
+                                                    Margin="0,5,0,0">
+                    </customcontrols:BindablePasswordBox>
+                    <TextBlock Text="{Binding ErrorMessage}"
+                           Foreground="#D7596D"
+                           FontSize="12"
+                           FontWeight="Medium"
+                           FontFamily="Montserrat"                             
+                           Margin="0,10,0,0"
+                           TextWrapping="Wrap"/>
 
-                    <PasswordBox x:Name="txtPass"
+                    <!--<PasswordBox x:Name="txtPass"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"                            
@@ -215,17 +236,29 @@
                                         Stretch="None"
                                         AlignmentX="Left"/>
                         </PasswordBox.Background>
-                    </PasswordBox>
+                    </PasswordBox>-->
 
-                    <Button x:Name="btnLogin"                          
+                    <Button x:Name="btnLogin" 
+                            Command="{Binding LoginCommand}"
                             BorderThickness="0"
                             Content="LOG IN"
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"
                             Cursor="Hand"                           
-                            Margin="0,50,0,0"
+                            Margin="0,30,0,0"
                            >
+
+                        <!--<Button x:Name="btnLogin" 
+                        Command="{Binding LoginCommand}"
+                        BorderThickness="0"
+                        Content="LOG IN"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"                           
+                        Margin="0,30,0,0">
+                        </Button>-->
 
                         <!--Click="btnLogin_Click"-->
 
