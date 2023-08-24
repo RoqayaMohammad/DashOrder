@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WpfApp1.Repositories;
+using WpfApp1.Model;
 
 namespace WpfApp1.ViewModel
 {
@@ -17,7 +19,7 @@ namespace WpfApp1.ViewModel
         private SecureString _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
-       // private IUserRepository userRepository;
+        private IUserRepository userRepository;
         //Properties
         public string Username
         {
@@ -75,7 +77,7 @@ namespace WpfApp1.ViewModel
         //Constructor
         public LoginViewModel()
         {
-            //userRepository = new UserRepository();
+            userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPassCommand("", ""));
         }
@@ -91,17 +93,17 @@ namespace WpfApp1.ViewModel
         }
         private void ExecuteLoginCommand(object obj)
         {
-            //var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
-            //if (isValidUser)
-            //{
-            //    Thread.CurrentPrincipal = new GenericPrincipal(
-            //        new GenericIdentity(Username), null);
-            //    IsViewVisible = false;
-            //}
-            //else
-            //{
-            //    ErrorMessage = "* Invalid username or password";
-            //}
+            var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
+            if (isValidUser)
+            {
+                Thread.CurrentPrincipal = new GenericPrincipal(
+                    new GenericIdentity(Username), null);
+                IsViewVisible = false;
+            }
+            else
+            {
+                ErrorMessage = "* Invalid username or password";
+            }
         }
         private void ExecuteRecoverPassCommand(string username, string email)
         {
