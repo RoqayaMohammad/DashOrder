@@ -5,3 +5,4 @@ Technologies Used:
 - .NET 7
 - SQL
 - MVVM Pattern
+- ADO.NET
