@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.ViewModel
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public abstract  class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
